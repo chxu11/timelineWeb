@@ -3,13 +3,13 @@ const { themes } = require('prism-react-renderer');
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
-  title: '胖头鱼学习网站',
-  tagline: '编程教程学习平台',
+  title: '中国近代史时间轴',
+  tagline: '从鸦片战争到新中国成立（1840-1949）',
   favicon: 'img/favicon.ico',
 
   url: 'https://chxu11.github.io',
   // baseUrl  需要改成你的仓库名，如果你启用了GitHub Pages，请改成你的仓库名,默认是/
-  baseUrl: '/mydoc/',
+  baseUrl: '/timelineWeb/',
   // 对于死链接，默认是warn，可以改成其他的选项，比如ignore,throw
   onBrokenLinks: 'warn',
 
@@ -50,7 +50,7 @@ const config = {
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
       navbar: {
-        title: '胖头鱼学习网站',
+        title: '中国近代史时间轴',
         logo: {
           alt: 'Logo',
           src: 'img/logo.svg',
@@ -96,7 +96,7 @@ const config = {
             position: 'right',
           },
           {
-            href: 'https://github.com/wxhzhwxhzh',
+            href: 'https://github.com/chxu11/timelineWeb',
             label: 'GitHub',
             position: 'right',
           },
@@ -105,7 +105,7 @@ const config = {
 
       footer: {
         style: 'dark',
-        copyright: `Copyright © ${new Date().getFullYear()} 胖头鱼学习网站`,
+        copyright: `Copyright © ${new Date().getFullYear()} 中国近代史时间轴`,
       },
 
       prism: {
@@ -122,7 +122,7 @@ const config = {
       announcementBar: {
         id: 'support_us',
         content:
-            '⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ <a href="https://github.com/wxhzhwxhzh/mydoc" target="_blank" rel="noopener noreferrer">学习借鉴</a> ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️',
+            '⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ <a href="https://github.com/chxu11/timelineWeb" target="_blank" rel="noopener noreferrer">GitHub 仓库</a> ⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️',
         backgroundColor: '#fafbfc',
         textColor: '#091E42',
         isCloseable: true,
