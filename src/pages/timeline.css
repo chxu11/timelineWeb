@@ -1,0 +1,401 @@
+/* ===== 时间轴样式 ===== */
+
+/* 基础重置 */
+.timeline-container {
+  padding: 80px 20px 40px;
+  position: relative;
+  font-family: "FangSong", "仿宋", "STFangsong", serif;
+  color: #2C2C2C;
+  background-color: #F5F1EB;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.timeline-container > .container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+  position: relative;
+}
+
+/* 时间轴主干线 */
+.timeline-container > .container::before {
+  content: "";
+  position: absolute;
+  left: 120px;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    #8B4513,
+    #2E86AB,
+    #A23B72,
+    #F18F01,
+    #C73E1D,
+    #3B1F2B,
+    #E63946
+  );
+  border-radius: 2px;
+  z-index: 0;
+}
+
+/* 时间轴标题 */
+.timeline-header {
+  text-align: center;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-header h2 {
+  font-size: 2rem;
+  color: #2C2C2C;
+  letter-spacing: 4px;
+  margin-bottom: 8px;
+}
+
+.timeline-header p {
+  font-size: 1rem;
+  color: #666;
+  letter-spacing: 1px;
+}
+
+/* 历史时期区块 */
+.timeline-period {
+  position: relative;
+  z-index: 1;
+  margin-bottom: 30px;
+}
+
+/* 时期节点圆点 */
+.timeline-period::before {
+  content: "";
+  position: absolute;
+  left: 114px;
+  top: 20px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 3px solid #F5F1EB;
+  z-index: 2;
+}
+
+#period1::before { background-color: #8B4513; }
+#period2::before { background-color: #2E86AB; }
+#period3::before { background-color: #A23B72; }
+#period4::before { background-color: #F18F01; }
+#period5::before { background-color: #C73E1D; }
+#period6::before { background-color: #3B1F2B; }
+#period7::before { background-color: #E63946; }
+
+/* 时期标题栏 */
+.period-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fff;
+  border-radius: 8px;
+  padding: 14px 20px;
+  margin-left: 150px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  border-left: 4px solid transparent;
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.period-header:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  transform: translateY(-1px);
+}
+
+#period1 .period-header { border-left-color: #8B4513; }
+#period2 .period-header { border-left-color: #2E86AB; }
+#period3 .period-header { border-left-color: #A23B72; }
+#period4 .period-header { border-left-color: #F18F01; }
+#period5 .period-header { border-left-color: #C73E1D; }
+#period6 .period-header { border-left-color: #3B1F2B; }
+#period7 .period-header { border-left-color: #E63946; }
+
+.period-title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  flex: 1;
+  margin: 0;
+}
+
+.period-years {
+  font-size: 0.95rem;
+  color: #666;
+  font-weight: 600;
+  min-width: 80px;
+}
+
+.period-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  letter-spacing: 1px;
+}
+
+#period1 .period-name { color: #8B4513; }
+#period2 .period-name { color: #2E86AB; }
+#period3 .period-name { color: #A23B72; }
+#period4 .period-name { color: #F18F01; }
+#period5 .period-name { color: #C73E1D; }
+#period6 .period-name { color: #3B1F2B; }
+#period7 .period-name { color: #E63946; }
+
+/* 展开/折叠按钮 */
+.toggle-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  font-size: 0.85rem;
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+.toggle-btn:hover {
+  color: #2C2C2C;
+}
+
+.timeline-period.collapsed .toggle-icon {
+  transform: rotate(-90deg);
+}
+
+/* 时期内容区 */
+.period-content {
+  margin-left: 150px;
+  margin-top: 8px;
+  overflow: hidden;
+  max-height: 3000px;
+  opacity: 1;
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+.timeline-period.collapsed .period-content {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+}
+
+.events-container {
+  background: #fff;
+  border-radius: 0 0 8px 8px;
+  padding: 16px 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  border-left: 4px solid transparent;
+  min-height: 40px;
+}
+
+#period1 .events-container { border-left-color: #8B4513; }
+#period2 .events-container { border-left-color: #2E86AB; }
+#period3 .events-container { border-left-color: #A23B72; }
+#period4 .events-container { border-left-color: #F18F01; }
+#period5 .events-container { border-left-color: #C73E1D; }
+#period6 .events-container { border-left-color: #3B1F2B; }
+#period7 .events-container { border-left-color: #E63946; }
+
+/* 事件项样式 */
+.event-item {
+  display: flex;
+  align-items: flex-start;
+  padding: 12px 0;
+  border-bottom: 1px solid #D4C5A9;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.event-item:last-child {
+  border-bottom: none;
+}
+
+.event-item:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.event-time {
+  flex-shrink: 0;
+  width: 100px;
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 600;
+  padding-top: 2px;
+}
+
+.event-content {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.event-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2C2C2C;
+  margin-bottom: 4px;
+}
+
+.event-detail {
+  font-size: 0.9rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* 可展开的详细内容 */
+.event-detail-expand {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
+  margin-top: 0;
+}
+
+.event-item.expanded .event-detail-expand {
+  max-height: 500px;
+  opacity: 1;
+  margin-top: 10px;
+}
+
+.event-detail-expand p {
+  font-size: 0.88rem;
+  color: #2C2C2C;
+  line-height: 1.6;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.02);
+  border-radius: 4px;
+  border-left: 3px solid #D4C5A9;
+}
+
+/* 不平等条约特殊样式 */
+.treaty-event {
+  position: relative;
+  border: 2px solid #DC3545;
+  border-radius: 6px;
+  background: rgba(220, 53, 69, 0.03);
+  margin: 8px 0;
+  padding: 12px 10px;
+}
+
+.treaty-event::before {
+  content: "📜";
+  position: absolute;
+  left: -30px;
+  top: 12px;
+  font-size: 1.1rem;
+}
+
+.treaty-event .event-time {
+  color: #DC3545;
+}
+
+.treaty-event .event-title {
+  color: #DC3545;
+}
+
+.treaty-event .event-detail-expand p {
+  border-left-color: #DC3545;
+  background-color: rgba(220, 53, 69, 0.05);
+}
+
+/* 展开指示器 */
+.event-item::after {
+  content: "▶";
+  position: absolute;
+  right: 10px;
+  top: 16px;
+  font-size: 0.7rem;
+  color: #666;
+  transition: transform 0.3s ease;
+}
+
+.event-item.expanded::after {
+  transform: rotate(90deg);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .timeline-container > .container::before {
+    left: 20px;
+  }
+
+  .timeline-period::before {
+    left: 14px;
+    top: 18px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .period-header {
+    margin-left: 50px;
+    padding: 10px 14px;
+  }
+
+  .period-content {
+    margin-left: 50px;
+  }
+
+  .period-title {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .period-years {
+    font-size: 0.85rem;
+  }
+
+  .period-name {
+    font-size: 1rem;
+  }
+
+  .events-container {
+    padding: 12px 14px;
+  }
+
+  .event-item {
+    flex-direction: column;
+  }
+
+  .event-time {
+    width: auto;
+    margin-bottom: 4px;
+  }
+
+  .event-content {
+    padding-left: 0;
+  }
+
+  .treaty-event::before {
+    left: -25px;
+  }
+}
+
+@media (max-width: 480px) {
+  .timeline-header h2 {
+    font-size: 1.25rem;
+  }
+
+  .timeline-header p {
+    font-size: 0.85rem;
+  }
+
+  .period-header {
+    margin-left: 40px;
+    padding: 8px 10px;
+  }
+
+  .period-content {
+    margin-left: 40px;
+  }
+
+  .event-title {
+    font-size: 0.95rem;
+  }
+
+  .event-detail {
+    font-size: 0.85rem;
+  }
+}
