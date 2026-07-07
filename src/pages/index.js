@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import StudyTest from '../components/StudyTest';
 import './timeline.css';
 
 // 时间轴数据
@@ -312,6 +313,7 @@ const timelineData = [
 function Timeline() {
   const [collapsedPeriods, setCollapsedPeriods] = useState({});
   const [expandedEvents, setExpandedEvents] = useState({});
+  const [isStudyTestOpen, setIsStudyTestOpen] = useState(false);
 
   const togglePeriod = (periodId) => {
     setCollapsedPeriods(prev => ({
@@ -327,13 +329,45 @@ function Timeline() {
     }));
   };
 
+  const handleNavigateToEvent = (periodId, eventTitle) => {
+    // 展开该时期
+    setCollapsedPeriods(prev => ({ ...prev, [periodId]: false }));
+    // 找到并展开对应事件
+    const period = timelineData.find(p => p.id === periodId);
+    if (period) {
+      const eventIndex = period.events.findIndex(e => e.title.includes(eventTitle));
+      if (eventIndex >= 0) {
+        const eventKey = `${periodId}-${eventIndex}`;
+        setExpandedEvents(prev => ({ ...prev, [eventKey]: true }));
+        // 滚动到该事件
+        setTimeout(() => {
+          const element = document.getElementById(eventKey);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            element.classList.add('highlighted');
+            setTimeout(() => element.classList.remove('highlighted'), 3000);
+          }
+        }, 300);
+      }
+    }
+  };
+
   return (
     <main className="timeline-container">
       <div className="container">
         <header className="timeline-header">
           <h2>中国近代史时间轴</h2>
           <p>从鸦片战争到新中国成立（1840-1949）</p>
+          <button className="study-btn" onClick={() => setIsStudyTestOpen(true)}>
+            学习测试
+          </button>
         </header>
+
+        <StudyTest
+          isOpen={isStudyTestOpen}
+          onClose={() => setIsStudyTestOpen(false)}
+          onNavigateToEvent={handleNavigateToEvent}
+        />
 
         {timelineData.map((period) => (
           <section key={period.id} id={period.id} className={`timeline-period ${collapsedPeriods[period.id] ? 'collapsed' : ''}`}>
@@ -353,6 +387,7 @@ function Timeline() {
                   return (
                     <div
                       key={eventKey}
+                      id={eventKey}
                       className={`event-item ${event.treaty ? 'treaty-event' : ''} ${expandedEvents[eventKey] ? 'expanded' : ''}`}
                       onClick={() => toggleEvent(eventKey)}
                     >

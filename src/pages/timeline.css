@@ -61,6 +61,32 @@
   letter-spacing: 1px;
 }
 
+/* 学习测试按钮 */
+.study-btn {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #E63946 0%, #C73E1D 100%);
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: "FangSong", "仿宋", "STFangsong", serif;
+  letter-spacing: 2px;
+  box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
+}
+
+.study-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(230, 57, 70, 0.4);
+}
+
+.study-btn:active {
+  transform: translateY(0);
+}
+
 /* 历史时期区块 */
 .timeline-period {
   position: relative;
@@ -398,4 +424,120 @@
   .event-detail {
     font-size: 0.85rem;
   }
+
+  .study-btn {
+    padding: 10px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ===== 事件高亮动画 ===== */
+@keyframes highlightPulse {
+  0%, 100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  50% {
+    background-color: rgba(230, 57, 70, 0.1);
+    box-shadow: 0 0 0 4px rgba(230, 57, 70, 0.2);
+  }
+}
+
+.event-item.highlighted {
+  animation: highlightPulse 1.5s ease-in-out 2;
+  border-radius: 6px;
+}
+
+/* ===== 页面美化增强 ===== */
+
+/* 时间轴标题区域增强 */
+.timeline-header {
+  padding: 30px 20px;
+  background: linear-gradient(135deg, rgba(139, 69, 19, 0.05) 0%, rgba(230, 57, 70, 0.05) 100%);
+  border-radius: 12px;
+  margin-bottom: 40px;
+}
+
+/* 时期标题栏增强 */
+.period-header {
+  position: relative;
+}
+
+.period-header::before {
+  content: '';
+  position: absolute;
+  left: -4px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: currentColor;
+  opacity: 0.8;
+}
+
+/* 事件项悬停效果增强 */
+.event-item {
+  border-radius: 6px;
+  padding: 12px 8px;
+  margin: 4px 0;
+}
+
+.event-item:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+  transform: translateX(4px);
+}
+
+/* 不平等条约悬停效果 */
+.treaty-event:hover {
+  background-color: rgba(220, 53, 69, 0.05);
+  border-color: #c82333;
+}
+
+/* 展开指示器增强 */
+.event-item::after {
+  content: "▶";
+  position: absolute;
+  right: 12px;
+  top: 16px;
+  font-size: 0.7rem;
+  color: #999;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.event-item:hover::after {
+  color: #666;
+}
+
+.event-item.expanded::after {
+  transform: rotate(90deg);
+  color: #E63946;
+}
+
+/* 详细内容展开增强 */
+.event-detail-expand p {
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.02) 0%, rgba(0, 0, 0, 0.04) 100%);
+  border-left: 3px solid;
+  border-image: linear-gradient(to bottom, #D4C5A9, transparent) 1;
+}
+
+.treaty-event .event-detail-expand p {
+  border-image: linear-gradient(to bottom, #DC3545, transparent) 1;
+}
+
+/* 滚动条美化 */
+.timeline-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.timeline-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb {
+  background: rgba(139, 69, 19, 0.3);
+  border-radius: 4px;
+}
+
+.timeline-container::-webkit-scrollbar-thumb:hover {
+  background: rgba(139, 69, 19, 0.5);
 }
